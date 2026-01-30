@@ -2,86 +2,92 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 IMPERO TOTALE TIGROTTA 👑</title>
+    <title>👑 IMPERO MULTISTANZA TIGROTTA 👑</title>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
-        
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
-        .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; font-size: 5em; text-transform: uppercase; }
-        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; box-shadow: 0 0 20px #ff00ff; }
+        .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
+        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
         
-        /* STANZE (NON CLICCABILI) */
-        #sidebar { width: 180px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; }
-        .room { padding: 15px; border-bottom: 1px solid #222; color: #888; cursor: default; font-size: 0.8em; text-transform: uppercase; }
+        /* STANZE CLICCABILI (SINISTRA) */
+        #sidebar { width: 200px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; }
+        .room-btn { padding: 20px 15px; border-bottom: 1px solid #222; color: #00f2ff; cursor: pointer; transition: 0.3s; font-size: 0.9em; text-transform: uppercase; font-weight: bold; text-align: center; }
+        .room-btn:hover { background: rgba(255, 0, 255, 0.2); color: #ff00ff; box-shadow: inset 0 0 10px #ff00ff; }
+        .room-active { background: rgba(255, 0, 255, 0.3); color: #fff; border-left: 4px solid #ff00ff; }
 
-        /* CHAT (CENTRO) */
+        /* CENTRO (CHAT) */
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
-        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; letter-spacing: 1px; }
+        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
         .chat-container { flex: 1; position: relative; }
-        .chat-container iframe { width: 100%; height: 100%; border: none; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* PANNELLO DESTRA (CAM SOPRA, YT SOTTO) */
-        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; overflow-y: auto; }
-        
-        .cam-box { width: 100%; height: 220px; background: #000; border: 1px solid #ff00ff; border-radius: 5px; overflow: hidden; }
-        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
-        
-        #yt-input { width: 100%; padding: 8px; background: #222; border: 1px solid #00f2ff; color: white; font-size: 0.7em; border-radius: 3px; box-sizing: border-box; }
+        /* DESTRA (CAM + YT) */
+        #right-panel { width: 380px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
+        .cam-box { width: 100%; height: 230px; border: 1px solid #ff00ff; border-radius: 5px; background: #000; }
+        .video-box { width: 100%; aspect-ratio: 16/9; border: 1px solid #00f2ff; border-radius: 5px; }
+        #yt-input { width: 100%; padding: 8px; background: #222; border: 1px solid #00f2ff; color: white; border-radius: 3px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NELL'IMPERO</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NEL REGNO</button>
     </div>
 
     <div id="overlay"></div>
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header" style="color:#ff00ff;">💎 STANZE</div>
-            <div class="room">🏟️ ARENA LIVE</div>
-            <div class="room">👑 PRIVATA BOSS</div>
-            <div class="room">🔥 ZONA VIP</div>
-            <div class="room">🎵 DISCO</div>
+            <div class="header">💎 STANZE</div>
+            <div class="room-btn room-active" onclick="changeRoom('ARENA', 'ArenaTigrotta')">🏟️ Arena</div>
+            <div class="room-btn" onclick="changeRoom('PRIVATA BOSS', 'PrivataBoss')">👑 Privata</div>
+            <div class="room-btn" onclick="changeRoom('ZONA VIP', 'ZonaVipTigre')">🔥 Zona VIP</div>
+            <div class="room-btn" onclick="changeRoom('DISCOTECA', 'DiscoTigrotta')">🎵 Disco</div>
         </div>
 
         <div id="main">
-            <div class="header">🏟️ CHAT DI TIGROTTA 🏟️</div>
+            <div class="header" id="current-room-title">🏟️ ARENA DI TIGROTTA 🏟️</div>
             <div class="chat-container">
                 <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
             </div>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#ff00ff;">👥 CAM AMICI</div>
-            <iframe class="cam-box" src="https://meet.jit.si/ArenaPrivataTigrotta2024" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+            <div class="header" id="cam-title">👥 VIDEO: ARENA</div>
+            <iframe id="cam-frame" class="cam-box" src="https://meet.jit.si/ArenaTigrotta" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
 
-            <div class="header" style="color:#00f2ff; margin-top: 10px;">🎥 YOUTUBE PLAYER</div>
+            <div class="header" style="color:#00f2ff;">🎥 YOUTUBE PLAYER</div>
             <input type="text" id="yt-input" placeholder="Incolla link YouTube e premi Invio" onchange="updateVideo(this.value)">
             <div class="video-box">
-                <iframe id="yt-player" width="100%" height="100%" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
+                <iframe id="yt-player" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
     <script>
+        function changeRoom(name, jitsiId) {
+            // Aggiorna Titoli
+            document.getElementById('current-room-title').innerText = "🏟️ " + name + " 🏟️";
+            document.getElementById('cam-title').innerText = "👥 VIDEO: " + name;
+            
+            // Cambia Stanza Video (Così chi è in stanze diverse non si vede)
+            document.getElementById('cam-frame').src = "https://meet.jit.si/" + jitsiId;
+
+            // Cambia stile bottoni
+            let btns = document.getElementsByClassName('room-btn');
+            for(let btn of btns) { btn.classList.remove('room-active'); }
+            event.currentTarget.classList.add('room-active');
+        }
+
         function updateVideo(url) {
             let videoId = "";
-            if (url.includes("v=")) {
-                videoId = url.split("v=")[1].split("&")[0];
-            } else if (url.includes("youtu.be/")) {
-                videoId = url.split("youtu.be/")[1];
-            }
-            if (videoId) {
-                document.getElementById('yt-player').src = "https://www.youtube.com/embed/" + videoId;
-            } else {
-                alert("Link non valido! Usa un link YouTube standard.");
-            }
+            if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
+            else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1];
+            if (videoId) document.getElementById('yt-player').src = "https://www.youtube.com/embed/" + videoId;
         }
     </script>
 
