@@ -15,36 +15,38 @@
             overflow: hidden; 
         }
 
-        /* Overlay scuro per far vedere bene la chat */
-        #overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
+        /* Scurisce lo sfondo per leggere bene */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
         
-        #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: 1s; }
+        /* Home Page */
+        #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
         .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
         .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; }
 
-        /* Struttura principale */
+        /* Contenitore Principale */
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
-        #sidebar { width: 250px; background: rgba(0, 0, 0, 0.8); border-right: 2px solid #ff00ff33; }
-        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
-        #right-panel { width: 250px; background: rgba(0, 0, 0, 0.8); border-left: 2px solid #00f2ff33; padding: 10px; }
         
-        .header { padding: 20px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        /* Colonne */
+        #sidebar { width: 250px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; }
+        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.4); }
+        #right-panel { width: 300px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; padding: 15px; display: flex; flex-direction: column; gap: 20px; }
         
-        /* La Chat - Ora è immortale */
+        .header { padding: 15px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        
+        /* Chat Area */
         .chat-container { flex: 1; width: 100%; position: relative; }
-        iframe { width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; }
+        .chat-container iframe { width: 100%; height: 100%; border: none; }
+
+        /* YouTube/Video Area */
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 2px solid #00f2ff; border-radius: 10px; overflow: hidden; }
+        .video-box iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">Entra nel Regno</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NEL REGNO</button>
     </div>
 
     <div id="overlay"></div>
@@ -52,7 +54,8 @@
     <div id="content-wrapper">
         <div id="sidebar">
             <div class="header">💎 Stanze</div>
-            <div style="padding:20px; color:#ff00ff;">🏟️ ARENA</div>
+            <div style="padding:15px; color:#ff00ff; background:rgba(255,0,255,0.1);">🏟️ ARENA PRINCIPALE</div>
+            <div style="padding:15px; color:#666;">👑 PRIVATA BOSS</div>
         </div>
 
         <div id="main">
@@ -63,7 +66,17 @@
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#00f2ff;">🎥 Live Cam</div>
+            <div class="header" style="color:#00f2ff;">🎥 PLAYER YOUTUBE</div>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCpS9S6DGiX8-1O9F2577UfA" allowfullscreen></iframe>
+            </div>
+            
+            <div class="header" style="color:#00f2ff; font-size: 0.8em;">📢 INFO IMPERO</div>
+            <div style="color: #888; font-size: 0.9em; text-align: center;">
+                Benvenuti nel regno di Tigrotta.<br>
+                Chat attiva 24/7.<br>
+                Rispetta la Boss!
+            </div>
         </div>
     </div>
 
