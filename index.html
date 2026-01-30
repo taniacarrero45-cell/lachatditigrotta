@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 IMPERO MULTISTANZA TIGROTTA 👑</title>
+    <title>👑 CREATORE IMPERO TIGROTTA 👑</title>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
@@ -12,22 +12,19 @@
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
         
-        /* STANZE CLICCABILI (SINISTRA) */
-        #sidebar { width: 200px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; }
-        .room-btn { padding: 20px 15px; border-bottom: 1px solid #222; color: #00f2ff; cursor: pointer; transition: 0.3s; font-size: 0.9em; text-transform: uppercase; font-weight: bold; text-align: center; }
-        .room-btn:hover { background: rgba(255, 0, 255, 0.2); color: #ff00ff; box-shadow: inset 0 0 10px #ff00ff; }
-        .room-active { background: rgba(255, 0, 255, 0.3); color: #fff; border-left: 4px solid #ff00ff; }
-
-        /* CENTRO (CHAT) */
+        /* BARRA CREAZIONE STANZE */
+        #sidebar { width: 220px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        .boss-input { width: 100%; padding: 10px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; }
+        .btn-crea { width: 100%; padding: 10px; background: #ff00ff; color: white; border: none; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; margin-bottom: 20px; }
+        
+        /* LAYOUT CENTRO E DESTRA */
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
-        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
-        .chat-container { flex: 1; position: relative; }
-        iframe { width: 100%; height: 100%; border: none; }
-
-        /* DESTRA (CAM + YT) */
+        .header { padding: 12px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; letter-spacing: 1px; }
+        
         #right-panel { width: 380px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
-        .cam-box { width: 100%; height: 230px; border: 1px solid #ff00ff; border-radius: 5px; background: #000; }
-        .video-box { width: 100%; aspect-ratio: 16/9; border: 1px solid #00f2ff; border-radius: 5px; }
+        .cam-box { width: 100%; height: 240px; border: 1px solid #ff00ff; border-radius: 5px; background: #000; }
+        
+        iframe { width: 100%; height: 100%; border: none; }
         #yt-input { width: 100%; padding: 8px; background: #222; border: 1px solid #00f2ff; color: white; border-radius: 3px; box-sizing: border-box; }
     </style>
 </head>
@@ -35,52 +32,63 @@
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NEL REGNO</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">APRI IL REGNO</button>
     </div>
 
     <div id="overlay"></div>
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header">💎 STANZE</div>
-            <div class="room-btn room-active" onclick="changeRoom('ARENA', 'ArenaTigrotta')">🏟️ Arena</div>
-            <div class="room-btn" onclick="changeRoom('PRIVATA BOSS', 'PrivataBoss')">👑 Privata</div>
-            <div class="room-btn" onclick="changeRoom('ZONA VIP', 'ZonaVipTigre')">🔥 Zona VIP</div>
-            <div class="room-btn" onclick="changeRoom('DISCOTECA', 'DiscoTigrotta')">🎵 Disco</div>
-        </div>
-
-        <div id="main">
-            <div class="header" id="current-room-title">🏟️ ARENA DI TIGROTTA 🏟️</div>
-            <div class="chat-container">
-                <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
+            <div class="header">👑 CREA STANZA</div>
+            <p style="font-size: 0.7em; color: #888; text-align: center;">Scrivi il nome e premi il tasto sotto</p>
+            <input type="text" id="room-name-input" class="boss-input" placeholder="Esempio: Privata">
+            <button class="btn-crea" onclick="creaNuovaStanza()">Crea Ora</button>
+            
+            <div id="lista-stanze">
+                <div class="header" style="font-size: 0.7em;">STANZA ATTIVA</div>
+                <div id="nome-stanza-corrente" style="color: #00f2ff; text-align: center; padding: 10px; font-weight: bold;">🏟️ ARENA</div>
             </div>
         </div>
 
-        <div id="right-panel">
-            <div class="header" id="cam-title">👥 VIDEO: ARENA</div>
-            <iframe id="cam-frame" class="cam-box" src="https://meet.jit.si/ArenaTigrotta" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+        <div id="main">
+            <div class="header" id="main-title">🏟️ ARENA DI TIGROTTA 🏟️</div>
+            <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
+        </div>
 
-            <div class="header" style="color:#00f2ff;">🎥 YOUTUBE PLAYER</div>
+        <div id="right-panel">
+            <div class="header" id="cam-title">🎥 VIDEO: ARENA</div>
+            <iframe id="cam-frame" class="cam-box" src="https://meet.jit.si/ArenaTigrotta2024" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+
+            <div class="header" style="color:#00f2ff;">📺 YOUTUBE</div>
             <input type="text" id="yt-input" placeholder="Incolla link YouTube e premi Invio" onchange="updateVideo(this.value)">
-            <div class="video-box">
+            <div style="width:100%; aspect-ratio:16/9; border:1px solid #00f2ff;">
                 <iframe id="yt-player" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
     <script>
-        function changeRoom(name, jitsiId) {
-            // Aggiorna Titoli
-            document.getElementById('current-room-title').innerText = "🏟️ " + name + " 🏟️";
-            document.getElementById('cam-title').innerText = "👥 VIDEO: " + name;
+        function creaNuovaStanza() {
+            let nome = document.getElementById('room-name-input').value.trim();
+            if (nome === "") {
+                alert("Boss, scrivi un nome per la stanza!");
+                return;
+            }
             
-            // Cambia Stanza Video (Così chi è in stanze diverse non si vede)
-            document.getElementById('cam-frame').src = "https://meet.jit.si/" + jitsiId;
-
-            // Cambia stile bottoni
-            let btns = document.getElementsByClassName('room-btn');
-            for(let btn of btns) { btn.classList.remove('room-active'); }
-            event.currentTarget.classList.add('room-active');
+            // 1. Cambia i titoli nel sito
+            document.getElementById('main-title').innerText = "🏟️ STANZA: " + nome.toUpperCase() + " 🏟️";
+            document.getElementById('cam-title').innerText = "🎥 VIDEO: " + nome.toUpperCase();
+            document.getElementById('nome-stanza-corrente').innerText = "📍 " + nome.toUpperCase();
+            
+            // 2. Cambia la stanza video Jitsi (usa il nome per creare un link unico)
+            // Puliamo il nome da spazi per il link
+            let idLink = nome.replace(/\s+/g, '') + "Tigrotta";
+            document.getElementById('cam-frame').src = "https://meet.jit.si/" + idLink;
+            
+            // 3. Pulisci l'input
+            document.getElementById('room-name-input').value = "";
+            
+            alert("Stanza '" + nome + "' creata! Di' ai tuoi amici di scrivere lo stesso nome per raggiungerti.");
         }
 
         function updateVideo(url) {
