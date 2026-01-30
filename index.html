@@ -2,35 +2,29 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 IMPERO ORIGINALE TIGROTTA 👑</title>
+    <title>👑 IMPERO TIGROTTA: GHOST LIVE 👑</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.9.min.js"></script>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
-        
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
         .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
         .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
-        
-        /* SIDEBAR BOSS */
         #sidebar { width: 180px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; }
-        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; font-size: 0.8em; }
-        .btn-crea { width: 100%; padding: 10px; background: #ff00ff; color: white; border: none; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; font-size: 0.7em; }
-
-        /* RULLO CHAT CENTRALE */
+        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; }
+        
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.2); }
         .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
-
-        /* PANNELLO DESTRA */
-        #right-panel { width: 380px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; align-items: center; }
         
-        /* CAM QUADRATA */
-        .square-cam { width: 350px; height: 350px; border: 2px solid #ff00ff; border-radius: 10px; overflow: hidden; background: #000; }
+        #right-panel { width: 400px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
+        .square-cam { width: 380px; height: 380px; border: 2px solid #ff00ff; border-radius: 10px; overflow: hidden; background: #000; }
         
-        /* BOX CHATTINA (Integrazione pulita) */
-        #chat-ghost-box { width: 350px; flex: 1; background: #000; border: 1px solid #00f2ff; border-radius: 10px; overflow: hidden; position: relative; }
-        
+        /* LA TUA NUOVA CHAT GHOST */
+        #ghost-chat-container { flex: 1; background: #0a0a0a; border: 1px solid #00f2ff; border-radius: 5px; display: flex; flex-direction: column; overflow: hidden; }
+        #messages { flex: 1; padding: 10px; overflow-y: auto; color: #00f2ff; font-size: 0.9em; font-family: monospace; }
+        #chat-input { background: #111; border: none; border-top: 1px solid #00f2ff; color: white; padding: 12px; outline: none; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -47,7 +41,7 @@
         <div id="sidebar">
             <div class="header">👑 BOSS</div>
             <input type="text" id="room-input" class="boss-input" placeholder="Nome Stanza...">
-            <button class="btn-crea" onclick="cambiaStanza()">CAMBIA STANZA</button>
+            <button class="boss-input" style="background:#ff00ff; color:white; border:none; cursor:pointer;" onclick="cambiaStanza()">CAMBIA TUTTO</button>
         </div>
 
         <div id="main">
@@ -58,30 +52,68 @@
         <div id="right-panel">
             <div class="header">🔳 VIDEO</div>
             <div class="square-cam">
-                <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024#config.prejoinPageEnabled=false&interfaceConfig.TOOLBAR_ALWAYS_VISIBLE=true" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+                <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024#config.prejoinPageEnabled=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
             </div>
 
-            <div class="header" style="color:#00f2ff;">💬 CHATTINA GHOST</div>
-            <div id="chat-ghost-box">
-                <p style="position:absolute; top:40%; width:100%; text-align:center; color:#444; font-size:0.7em; z-index:-1;">Usa il tasto chat nel video sopra<br>per parlare in privato!</p>
-                <iframe id="chat-ghost-frame" src="about:blank"></iframe>
+            <div class="header" style="color:#00f2ff;">👻 CHAT GHOST PRIVATA</div>
+            <div id="ghost-chat-container">
+                <div id="messages"><i>Benvenuta Boss. Cambia stanza per attivare la chat privata...</i></div>
+                <input type="text" id="chat-input" placeholder="Scrivi e premi Invio..." onkeypress="if(event.key==='Enter') sendMessage()">
             </div>
         </div>
     </div>
 
     <script>
+        let pubnub;
+        let channelName = 'ArenaTigrottaDefault';
+
+        function initChat(room) {
+            channelName = room;
+            document.getElementById('messages').innerHTML = "<i>--- Connessa a stanza GHOST: " + room + " ---</i>";
+            
+            pubnub = new PubNub({
+                publishKey: 'pub-c-4749f706-0563-44f0-9759-38374f67332c', 
+                subscribeKey: 'sub-c-1011306a-0402-498c-8514-9842456f913e',
+                uuid: "User_" + Math.floor(Math.random() * 1000)
+            });
+
+            pubnub.subscribe({ channels: [channelName] });
+
+            pubnub.addListener({
+                message: function(m) {
+                    let msgArea = document.getElementById('messages');
+                    let newMsg = document.createElement('div');
+                    newMsg.style.marginBottom = "8px";
+                    newMsg.innerHTML = `<span style="color:#ff00ff">></span> ${m.message}`;
+                    msgArea.appendChild(newMsg);
+                    msgArea.scrollTop = msgArea.scrollHeight;
+                }
+            });
+        }
+
+        function sendMessage() {
+            let input = document.getElementById('chat-input');
+            if (input.value.trim() !== "") {
+                pubnub.publish({
+                    channel: channelName,
+                    message: input.value
+                });
+                input.value = "";
+            }
+        }
+
         function cambiaStanza() {
             let nome = document.getElementById('room-input').value.trim();
             if(nome === "") return;
-            let cleanName = nome.replace(/\s+/g, '') + "Tigrotta";
-            
+            let clean = nome.replace(/\s+/g, '');
             document.getElementById('title-main').innerText = "🏟️ STANZA: " + nome.toUpperCase();
-            
-            // Aggiorna la cam (la chat è già dentro Jitsi)
-            document.getElementById('cam-frame').src = "https://meet.jit.si/" + cleanName + "#config.prejoinPageEnabled=false&interfaceConfig.TOOLBAR_ALWAYS_VISIBLE=true";
-            
+            document.getElementById('cam-frame').src = "https://meet.jit.si/" + clean + "Tigrotta#config.prejoinPageEnabled=false";
+            initChat(clean + "_Ghost");
             document.getElementById('room-input').value = "";
         }
+        
+        // Carica chat base
+        initChat(channelName);
     </script>
 </body>
 </html>
