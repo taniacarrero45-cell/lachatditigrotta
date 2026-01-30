@@ -2,55 +2,73 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 TIGROTTA PRIVATE ARENA 👑</title>
+    <title>👑 IMPERO TOTALE TIGROTTA 👑</title>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
+        
+        /* Pagina Iniziale */
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
         .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
-        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; }
+        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
+
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
-        #sidebar { width: 150px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; }
-        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.4); }
         
-        /* Pannello Videochiamata con Amici */
-        #right-panel { width: 450px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; }
-        
-        .header { padding: 15px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        /* 1. STANZE (SINISTRA) */
+        #sidebar { width: 180px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; }
+        .room { padding: 15px; border-bottom: 1px solid #222; cursor: pointer; transition: 0.3s; font-size: 0.8em; }
+        .room:hover { background: rgba(255, 0, 255, 0.2); color: #ff00ff; }
+
+        /* 2. CHAT (CENTRO) */
+        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
+        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; letter-spacing: 1px; }
         .chat-container { flex: 1; position: relative; }
         .chat-container iframe { width: 100%; height: 100%; border: none; }
+
+        /* 3. YOUTUBE E CAM (DESTRA) */
+        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 5px; gap: 5px; }
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
         
-        /* Box Videochiamata */
-        .cam-friends { flex: 1; width: 100%; background: #000; border: none; }
+        /* CAM RIMPICCIOLITE */
+        .cam-small { width: 100%; height: 200px; background: #000; border: 1px solid #ff00ff; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA IN VIDEO-ARENA</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NELL'IMPERO</button>
     </div>
 
     <div id="overlay"></div>
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header">BOSS</div>
-            <div style="padding:15px; color:#ff00ff; font-size:0.7em; text-align:center;">ONLINE</div>
+            <div class="header">💎 STANZE</div>
+            <div class="room">🏟️ ARENA LIVE</div>
+            <div class="room">👑 PRIVATA BOSS</div>
+            <div class="room">🔥 ZONA VIP</div>
+            <div class="room">🎵 DISCO</div>
         </div>
 
         <div id="main">
-            <div class="header">CHAT DI GRUPPO</div>
+            <div class="header">🏟️ CHAT PRINCIPALE 🏟️</div>
             <div class="chat-container">
                 <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
             </div>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#00f2ff;">👥 CAM AMICI (Jitsi)</div>
-            <iframe class="cam-friends" src="https://meet.jit.si/ArenaPrivataTigrotta2024#config.startWithVideoMuted=false&config.startWithAudioMuted=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
-            <div style="padding: 10px; font-size: 0.8em; color: #00f2ff; text-align: center; background: #111;">
-                Dì ai tuoi amici di entrare sul sito per vedervi!
+            <div class="header" style="color:#00f2ff;">🎥 YOUTUBE PLAYER</div>
+            <div class="video-box">
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=UCpS9S6DGiX8-1O9F2577UfA" allowfullscreen></iframe>
+            </div>
+
+            <div class="header" style="color:#ff00ff;">👥 CAM AMICI (MINI)</div>
+            <iframe class="cam-small" src="https://meet.jit.si/ArenaPrivataTigrotta2024#config.startWithVideoMuted=false&config.startWithAudioMuted=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+            
+            <div style="padding: 5px; font-size: 0.7em; color: #888; text-align: center;">
+                Qui sotto puoi aggiungere altre info o link!
             </div>
         </div>
     </div>
