@@ -1,13 +1,71 @@
-body { 
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>👑 IMPERO DI TIGROTTA 👑</title>
+    <style>
+        body { 
             margin: 0; 
-            background-color: #000; 
-            background-image: url('https://wallpapercave.com/wp/wp4033324.jpg'); /* COPIA QUESTA RIGA */
+            background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; 
             background-size: cover; 
-            background-position: center;
-            background-attachment: fixed;
             color: #eee; 
-            font-family: 'Segoe UI', sans-serif; 
+            font-family: sans-serif; 
             height: 100vh; 
             display: flex; 
             overflow: hidden; 
         }
+
+        /* Overlay scuro per far vedere bene la chat */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: 1s; }
+        .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
+        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; }
+
+        /* Struttura principale */
+        #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
+        #sidebar { width: 250px; background: rgba(0, 0, 0, 0.8); border-right: 2px solid #ff00ff33; }
+        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
+        #right-panel { width: 250px; background: rgba(0, 0, 0, 0.8); border-left: 2px solid #00f2ff33; padding: 10px; }
+        
+        .header { padding: 20px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        
+        /* La Chat - Ora è immortale */
+        .chat-container { flex: 1; width: 100%; position: relative; }
+        iframe { width: 100%; height: 100%; border: none; position: absolute; top: 0; left: 0; }
+    </style>
+</head>
+<body>
+
+    <div id="home-page">
+        <h1 class="neon-title">TIGROTTA</h1>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">Entra nel Regno</button>
+    </div>
+
+    <div id="overlay"></div>
+
+    <div id="content-wrapper">
+        <div id="sidebar">
+            <div class="header">💎 Stanze</div>
+            <div style="padding:20px; color:#ff00ff;">🏟️ ARENA</div>
+        </div>
+
+        <div id="main">
+            <div class="header">🏟️ ARENA DI TIGROTTA 🏟️</div>
+            <div class="chat-container">
+                <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
+            </div>
+        </div>
+
+        <div id="right-panel">
+            <div class="header" style="color:#00f2ff;">🎥 Live Cam</div>
+        </div>
+    </div>
+
+</body>
+</html>
