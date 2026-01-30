@@ -12,7 +12,7 @@
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
         #sidebar { width: 180px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; }
-        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; }
+        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; font-size: 0.8em; }
         
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.2); }
         .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
@@ -22,8 +22,10 @@
         /* CAM QUADRATA */
         .square-cam { width: 380px; height: 380px; border: 2px solid #ff00ff; border-radius: 10px; overflow: hidden; background: #000; }
         
-        /* CHAT GHOST (Ora integrata con un servizio esterno invisibile) */
-        #ghost-container { flex: 1; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
+        /* NUOVA CHAT GHOST INTEGRATA */
+        #ghost-box { flex: 1; background: #050505; border: 1px solid #00f2ff; border-radius: 5px; display: flex; flex-direction: column; }
+        #ghost-frame { flex: 1; width: 100%; border: none; }
+
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -40,8 +42,7 @@
         <div id="sidebar">
             <div class="header">👑 BOSS</div>
             <input type="text" id="room-input" class="boss-input" placeholder="Nome Stanza...">
-            <button class="boss-input" style="background:#ff00ff; color:white; border:none; cursor:pointer;" onclick="cambiaTutto()">CREA/CAMBIA</button>
-            <p style="font-size:0.6em; color:#888; text-align:center; margin-top:20px;">Scrivi lo stesso nome stanza con i tuoi amici!</p>
+            <button class="boss-input" style="background:#ff00ff; color:white; border:none; cursor:pointer;" onclick="cambiaTutto()">CAMBIA STANZA</button>
         </div>
 
         <div id="main">
@@ -50,14 +51,14 @@
         </div>
 
         <div id="right-panel">
-            <div class="header">🔳 VIDEO</div>
+            <div class="header">🔳 CAM VIDEO</div>
             <div class="square-cam">
                 <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024#config.prejoinPageEnabled=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
             </div>
 
-            <div class="header" style="color:#00f2ff;">👻 CHAT GHOST (PRIVATA)</div>
-            <div id="ghost-container">
-                <iframe id="ghost-frame" src="https://www.minichat.com/chat/ArenaTigrotta2024"></iframe>
+            <div class="header" style="color:#00f2ff;">👻 CHAT GHOST PRIVATA</div>
+            <div id="ghost-box">
+                <iframe id="ghost-frame" src="https://deadsimplechat.com/v2/ArenaTigrotta2024"></iframe>
             </div>
         </div>
     </div>
@@ -66,16 +67,15 @@
         function cambiaTutto() {
             let nome = document.getElementById('room-input').value.trim();
             if(nome === "") return;
-            let cleanName = nome.replace(/\s+/g, '') + "Tigrotta";
+            let cleanName = nome.replace(/\s+/g, '') + "Tigrotta2025";
             
-            // Cambia Titolo
             document.getElementById('title-main').innerText = "🏟️ STANZA: " + nome.toUpperCase();
             
             // Cambia Cam
             document.getElementById('cam-frame').src = "https://meet.jit.si/" + cleanName + "#config.prejoinPageEnabled=false";
             
-            // Cambia Chat Ghost (Crea una stanza chat nuova al volo)
-            document.getElementById('ghost-frame').src = "https://www.tlk.io/" + cleanName;
+            // Cambia Chat Ghost (Usa un link diretto che permette la scrittura)
+            document.getElementById('ghost-frame').src = "https://deadsimplechat.com/v2/" + cleanName;
             
             document.getElementById('room-input').value = "";
         }
