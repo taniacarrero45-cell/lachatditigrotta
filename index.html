@@ -2,41 +2,21 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 MULTICAM IMPERO TIGROTTA 👑</title>
+    <title>👑 MULTICAM TIGROTTA 👑</title>
     <style>
-        body { 
-            margin: 0; 
-            background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; 
-            background-size: cover; 
-            color: #eee; 
-            font-family: 'Segoe UI', sans-serif; 
-            height: 100vh; 
-            display: flex; 
-            overflow: hidden; 
-        }
-
+        body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
-        
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
         .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
         .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; }
-
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
-        
-        #sidebar { width: 200px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; }
+        #sidebar { width: 180px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; }
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.4); }
-        
-        /* SEZIONE MULTICAM A DESTRA */
-        #right-panel { width: 400px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        
-        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; font-size: 0.9em; }
-        
+        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; padding: 10px; overflow-y: auto; }
+        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
         .chat-container { flex: 1; width: 100%; position: relative; }
         .chat-container iframe { width: 100%; height: 100%; border: none; }
-
-        /* BOX PER LE MULTICAM */
-        .multicam-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
-        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; margin-bottom: 15px; border-radius: 5px; overflow: hidden; }
         .video-box iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -44,38 +24,37 @@
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ATTIVA MULTICAM</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ATTIVA SISTEMA</button>
     </div>
 
     <div id="overlay"></div>
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header">💎 MENU</div>
-            <div style="padding:15px; color:#ff00ff; font-size: 0.8em;">🏟️ ARENA LIVE</div>
+            <div class="header">MENU</div>
+            <div style="padding:15px; color:#ff00ff; font-size:0.8em;">LIVE ARENA</div>
         </div>
 
         <div id="main">
-            <div class="header">🏟️ CHAT PRINCIPALE 🏟️</div>
+            <div class="header">ARENA CHAT</div>
             <div class="chat-container">
                 <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
             </div>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#00f2ff;">🎥 MULTICAM 1</div>
+            <div class="header" style="color:#00f2ff; margin-bottom:10px;">MULTICAM</div>
+            
             <div class="video-box">
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=ID_CANALE_1" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
             </div>
 
-            <div class="header" style="color:#00f2ff;">🎥 MULTICAM 2</div>
             <div class="video-box">
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=ID_CANALE_2" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
             </div>
 
-            <div class="header" style="color:#00f2ff;">🎥 MULTICAM 3</div>
             <div class="video-box">
-                <iframe src="https://www.youtube.com/embed/live_stream?channel=ID_CANALE_3" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/YpXp_Hk3_n4" allowfullscreen></iframe>
             </div>
         </div>
     </div>
