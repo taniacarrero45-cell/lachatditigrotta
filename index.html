@@ -8,29 +8,28 @@
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
         
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
-        .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
-        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
+        .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; font-size: 5em; text-transform: uppercase; }
+        .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; box-shadow: 0 0 20px #ff00ff; }
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
         
-        /* 1. STANZE (NON CLICCABILI) */
+        /* STANZE (NON CLICCABILI) */
         #sidebar { width: 180px; background: rgba(10, 10, 10, 0.9); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; }
-        .room { padding: 15px; border-bottom: 1px solid #222; color: #888; cursor: default; font-size: 0.8em; }
+        .room { padding: 15px; border-bottom: 1px solid #222; color: #888; cursor: default; font-size: 0.8em; text-transform: uppercase; }
 
-        /* 2. CHAT (CENTRO) */
+        /* CHAT (CENTRO) */
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.3); }
-        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; letter-spacing: 1px; }
         .chat-container { flex: 1; position: relative; }
         .chat-container iframe { width: 100%; height: 100%; border: none; }
 
-        /* 3. YOUTUBE CON COPIA-INCOLLA E CAM */
-        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
-        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; position: relative; }
+        /* PANNELLO DESTRA (CAM SOPRA, YT SOTTO) */
+        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; overflow-y: auto; }
         
-        /* Input per incollare il link */
-        #yt-input { width: 100%; padding: 5px; background: #222; border: 1px solid #ff00ff; color: white; font-size: 0.7em; border-radius: 3px; }
+        .cam-box { width: 100%; height: 220px; background: #000; border: 1px solid #ff00ff; border-radius: 5px; overflow: hidden; }
+        .video-box { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
         
-        .cam-small { width: 100%; height: 180px; background: #000; border: 1px solid #ff00ff; border-radius: 5px; }
+        #yt-input { width: 100%; padding: 8px; background: #222; border: 1px solid #00f2ff; color: white; font-size: 0.7em; border-radius: 3px; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -44,7 +43,7 @@
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header">💎 STANZE</div>
+            <div class="header" style="color:#ff00ff;">💎 STANZE</div>
             <div class="room">🏟️ ARENA LIVE</div>
             <div class="room">👑 PRIVATA BOSS</div>
             <div class="room">🔥 ZONA VIP</div>
@@ -52,23 +51,21 @@
         </div>
 
         <div id="main">
-            <div class="header">🏟️ CHAT PRINCIPALE 🏟️</div>
+            <div class="header">🏟️ CHAT DI TIGROTTA 🏟️</div>
             <div class="chat-container">
                 <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
             </div>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#00f2ff;">🎥 YOUTUBE PLAYER</div>
-            
-            <input type="text" id="yt-input" placeholder="Incolla il link del video e premi INVIO" onchange="updateVideo(this.value)">
-            
-            <div class="video-box" id="player-container">
-                <iframe id="yt-player" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
-            </div>
+            <div class="header" style="color:#ff00ff;">👥 CAM AMICI</div>
+            <iframe class="cam-box" src="https://meet.jit.si/ArenaPrivataTigrotta2024" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
 
-            <div class="header" style="color:#ff00ff;">👥 CAM AMICI (MINI)</div>
-            <iframe class="cam-small" src="https://meet.jit.si/ArenaPrivataTigrotta2024" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+            <div class="header" style="color:#00f2ff; margin-top: 10px;">🎥 YOUTUBE PLAYER</div>
+            <input type="text" id="yt-input" placeholder="Incolla link YouTube e premi Invio" onchange="updateVideo(this.value)">
+            <div class="video-box">
+                <iframe id="yt-player" width="100%" height="100%" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
@@ -83,7 +80,7 @@
             if (videoId) {
                 document.getElementById('yt-player').src = "https://www.youtube.com/embed/" + videoId;
             } else {
-                alert("Link non valido! Incolla un link di YouTube (es: https://www.youtube.com/watch?v=...)");
+                alert("Link non valido! Usa un link YouTube standard.");
             }
         }
     </script>
