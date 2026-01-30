@@ -2,41 +2,41 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 SQUARE IMPERO TIGROTTA 👑</title>
+    <title>👑 IMPERO TIGROTTA 👑</title>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
+        
         #home-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; }
         .neon-title { color: #fff; text-shadow: 0 0 20px #ff00ff; font-size: 5em; text-transform: uppercase; }
         .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
         
-        /* SIDEBAR */
-        #sidebar { width: 220px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
+        /* SINISTRA: COMANDI */
+        #sidebar { width: 200px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
         .boss-input { width: 100%; padding: 10px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; }
         .btn-crea { width: 100%; padding: 10px; background: #ff00ff; color: white; border: none; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
 
-        /* AREA CENTRALE - CAM QUADRATA */
-        #main { flex: 1.5; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.2); align-items: center; }
-        .header { width: 100%; padding: 12px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        /* CENTRO: RULLO CHAT (Tutto spazio libero) */
+        #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.2); }
+        .header { padding: 12px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
         
-        /* IL QUADRATO MAGICO */
-        .square-cam-container { 
-            width: 500px; /* Larghezza fissa */
-            height: 500px; /* Altezza uguale alla larghezza = QUADRATO */
-            margin-top: 20px;
-            border: 3px solid #ff00ff;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-            border-radius: 15px;
-            overflow: hidden;
+        /* DESTRA: CAM QUADRATA + YT */
+        #right-panel { width: 350px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 15px; align-items: center; }
+        
+        /* ECCO IL QUADRATO NEL PANNELLO */
+        .square-cam { 
+            width: 320px; 
+            height: 320px; 
+            border: 2px solid #ff00ff; 
+            border-radius: 10px; 
+            overflow: hidden; 
             background: #000;
         }
 
-        /* AREA DESTRA (YT + CBOX) */
-        #right-panel { width: 380px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
-        iframe { width: 100%; height: 100%; border: none; }
         .video-box { width: 100%; aspect-ratio: 16/9; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
@@ -50,29 +50,26 @@
 
     <div id="content-wrapper">
         <div id="sidebar">
-            <div class="header">👑 CREA STANZA</div>
-            <input type="text" id="room-name-input" class="boss-input" placeholder="Nome Stanza...">
-            <button class="btn-crea" onclick="creaNuovaStanza()">Cambia</button>
-            <p style="font-size: 0.65em; color: #888; margin-top: 20px; text-align: center;">Il quadrato video è attivo!</p>
+            <div class="header">👑 BOSS</div>
+            <input type="text" id="room-name-input" class="boss-input" placeholder="Nuova Stanza...">
+            <button class="btn-crea" onclick="creaNuovaStanza()">CAMBIA</button>
         </div>
 
         <div id="main">
-            <div class="header" id="cam-title">🔳 SQUARE CAM: ARENA</div>
-            <div class="square-cam-container">
-                <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024#config.prejoinPageEnabled=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
-            </div>
+            <div class="header" id="current-room">🏟️ ARENA DI TIGROTTA</div>
+            <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="color:#00f2ff;">📺 YOUTUBE</div>
+            <div class="header" id="cam-title" style="width:100%;">🔳 CAM QUADRATA</div>
+            <div class="square-cam">
+                <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+            </div>
+
+            <div class="header" style="color:#00f2ff; width:100%;">📺 YOUTUBE</div>
             <input type="text" id="yt-input" class="boss-input" style="border-color:#00f2ff; font-size: 0.7em;" placeholder="Link YouTube..." onchange="updateVideo(this.value)">
             <div class="video-box">
                 <iframe id="yt-player" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
-            </div>
-
-            <div class="header" style="font-size: 0.7em;">💬 CHAT RAPIDA</div>
-            <div style="flex: 1;">
-                <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
             </div>
         </div>
     </div>
@@ -82,8 +79,8 @@
             let nome = document.getElementById('room-name-input').value.trim();
             if (nome === "") return;
             let idLink = nome.replace(/\s+/g, '') + "Tigrotta";
-            document.getElementById('cam-title').innerText = "🔳 SQUARE CAM: " + nome.toUpperCase();
-            document.getElementById('cam-frame').src = "https://meet.jit.si/" + idLink + "#config.prejoinPageEnabled=false";
+            document.getElementById('current-room').innerText = "🏟️ STANZA: " + nome.toUpperCase();
+            document.getElementById('cam-frame').src = "https://meet.jit.si/" + idLink;
             document.getElementById('room-name-input').value = "";
         }
 
