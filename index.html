@@ -2,8 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>👑 IMPERO TOTALE TIGROTTA 👑</title>
-    <script src="https://meet.jit.si/external_api.js"></script>
+    <title>👑 IMPERO TIGROTTA: GHOST EDITION 👑</title>
     <style>
         body { margin: 0; background: #000 url('https://wallpapercave.com/wp/wp4033324.jpg') no-repeat center center fixed; background-size: cover; color: #eee; font-family: sans-serif; height: 100vh; display: flex; overflow: hidden; }
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 1; }
@@ -12,26 +11,22 @@
         .btn-entra { padding: 20px 60px; background: linear-gradient(90deg, #ff00ff, #00f2ff); color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; font-size: 1.5em; text-transform: uppercase; }
 
         #content-wrapper { position: relative; z-index: 10; display: flex; width: 100%; height: 100%; }
-        #sidebar { width: 180px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; box-sizing: border-box; }
-        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; }
-        .btn-crea { width: 100%; padding: 10px; background: #ff00ff; color: white; border: none; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; font-size: 0.7em; }
-
+        #sidebar { width: 180px; background: rgba(10, 10, 10, 0.95); border-right: 2px solid #ff00ff33; display: flex; flex-direction: column; padding: 10px; }
+        .boss-input { width: 100%; padding: 8px; background: #111; border: 1px solid #ff00ff; color: #ff00ff; border-radius: 5px; margin-bottom: 10px; font-weight: bold; box-sizing: border-box; }
+        
         #main { flex: 1; display: flex; flex-direction: column; background: rgba(0, 0, 0, 0.2); }
-        .header { padding: 12px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
+        .header { padding: 10px; background: rgba(30, 30, 30, 0.9); text-align: center; color: #ff00ff; font-weight: bold; border-bottom: 2px solid #222; text-transform: uppercase; }
         
-        #right-panel { width: 400px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; align-items: center; }
+        #right-panel { width: 400px; background: rgba(10, 10, 10, 0.9); border-left: 2px solid #00f2ff33; display: flex; flex-direction: column; padding: 10px; gap: 10px; }
         
-        /* IL QUADRATO PERFETTO */
-        #jitsi-container { 
-            width: 380px; 
-            height: 380px; 
-            border: 2px solid #ff00ff; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            background: #000;
-        }
+        /* CAM QUADRATA */
+        .square-cam { width: 380px; height: 380px; border: 2px solid #ff00ff; border-radius: 10px; overflow: hidden; background: #000; }
+        
+        /* CHAT GHOST PERSONALIZZATA */
+        #ghost-chat { flex: 1; background: rgba(20, 20, 20, 0.9); border: 1px solid #00f2ff; border-radius: 5px; display: flex; flex-direction: column; overflow: hidden; }
+        #ghost-messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 0.8em; color: #00f2ff; }
+        #ghost-input { padding: 8px; background: #000; border: none; border-top: 1px solid #00f2ff; color: white; outline: none; }
 
-        .video-box { width: 100%; aspect-ratio: 16/9; border: 1px solid #00f2ff; border-radius: 5px; overflow: hidden; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
@@ -39,7 +34,7 @@
 
     <div id="home-page">
         <h1 class="neon-title">TIGROTTA</h1>
-        <button class="btn-entra" onclick="startApp()">APRI IMPERO</button>
+        <button class="btn-entra" onclick="document.getElementById('home-page').style.display='none'">ENTRA NEL REGNO</button>
     </div>
 
     <div id="overlay"></div>
@@ -47,71 +42,51 @@
     <div id="content-wrapper">
         <div id="sidebar">
             <div class="header">👑 BOSS</div>
-            <input type="text" id="room-name-input" class="boss-input" placeholder="Stanza...">
-            <button class="btn-crea" onclick="changeRoom()">CAMBIA</button>
+            <input type="text" id="room-name" class="boss-input" placeholder="Nome Stanza...">
+            <button class="boss-input" style="background:#ff00ff; color:white; border:none; cursor:pointer;" onclick="cambiaStanza()">CAMBIA</button>
         </div>
 
         <div id="main">
-            <div class="header" id="current-room">🏟️ ARENA DI TIGROTTA</div>
+            <div class="header" id="title-main">🏟️ ARENA DI TIGROTTA</div>
             <iframe src="https://www5.cbox.ws/box/?boxid=960938&boxtag=AP3Bo3"></iframe>
         </div>
 
         <div id="right-panel">
-            <div class="header" style="width:100%;">🔳 VIDEO & CHAT GHOST</div>
-            <div id="jitsi-container"></div>
+            <div class="header">🔳 CAM VIDEO</div>
+            <div class="square-cam">
+                <iframe id="cam-frame" src="https://meet.jit.si/ArenaTigrotta2024#config.prejoinPageEnabled=false" allow="camera; microphone; display-capture; fullscreen; autoplay"></iframe>
+            </div>
 
-            <div class="header" style="color:#00f2ff; width:100%;">📺 YOUTUBE</div>
-            <input type="text" id="yt-input" class="boss-input" style="border-color:#00f2ff;" placeholder="Link YouTube..." onchange="updateVideo(this.value)">
-            <div class="video-box">
-                <iframe id="yt-player" src="https://www.youtube.com/embed/21X5lGlDOfg" allowfullscreen></iframe>
+            <div class="header" style="color:#00f2ff;">👻 CHAT GHOST (PRIVATA)</div>
+            <div id="ghost-chat">
+                <div id="ghost-messages"></div>
+                <input type="text" id="ghost-input" placeholder="Scrivi qui... (invio per mandare)" onkeypress="if(event.key === 'Enter') sendGhost()">
             </div>
         </div>
     </div>
 
     <script>
-        let api = null;
-
-        function startApp() {
-            document.getElementById('home-page').style.display = 'none';
-            loadJitsi('ArenaTigrotta2024');
-        }
-
-        function loadJitsi(roomName) {
-            if (api) api.dispose(); // Chiude la vecchia stanza se esiste
+        function sendGhost() {
+            let inp = document.getElementById('ghost-input');
+            let msgBox = document.getElementById('ghost-messages');
+            if(inp.value.trim() === "") return;
             
-            const domain = 'meet.jit.si';
-            const options = {
-                roomName: roomName,
-                width: '100%',
-                height: '100%',
-                parentNode: document.querySelector('#jitsi-container'),
-                configOverwrite: {
-                    prejoinPageEnabled: false,
-                    disableDeepLinking: true, // QUESTO BLOCCA IL REDIRECT SU CHROME/APP
-                    mobile: {
-                        setNoExternalApp: true // QUESTO BLOCCA L'APP SU MOBILE
-                    }
-                },
-                interfaceConfigOverwrite: {
-                    TOOLBAR_ALWAYS_VISIBLE: true
-                }
-            };
-            api = new JitsiMeetExternalAPI(domain, options);
+            let div = document.createElement('div');
+            div.innerHTML = "<b>TU:</b> " + inp.value;
+            div.style.marginBottom = "5px";
+            msgBox.appendChild(div);
+            msgBox.scrollTop = msgBox.scrollHeight;
+            inp.value = "";
+            // Nota: Questa chat è locale per ora. Se vuoi che la leggano altri, serve un server, 
+            // ma per ora puliamo la visuale così puoi scrivere i tuoi appunti o segreti!
         }
 
-        function changeRoom() {
-            let nome = document.getElementById('room-name-input').value.trim();
-            if (nome === "") return;
-            document.getElementById('current-room').innerText = "🏟️ STANZA: " + nome.toUpperCase();
-            loadJitsi(nome.replace(/\s+/g, '') + "Tigrotta");
-            document.getElementById('room-name-input').value = "";
-        }
-
-        function updateVideo(url) {
-            let videoId = "";
-            if (url.includes("v=")) videoId = url.split("v=")[1].split("&")[0];
-            else if (url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1];
-            if (videoId) document.getElementById('yt-player').src = "https://www.youtube.com/embed/" + videoId;
+        function cambiaStanza() {
+            let nome = document.getElementById('room-name').value.trim();
+            if(nome === "") return;
+            document.getElementById('title-main').innerText = "🏟️ STANZA: " + nome.toUpperCase();
+            document.getElementById('cam-frame').src = "https://meet.jit.si/" + nome.replace(/\s+/g, '') + "Tigrotta#config.prejoinPageEnabled=false";
+            document.getElementById('ghost-messages').innerHTML = "<i>--- Stanza cambiata: " + nome + " ---</i>";
         }
     </script>
 </body>
